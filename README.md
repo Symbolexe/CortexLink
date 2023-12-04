@@ -83,4 +83,4 @@ If you have an idea or some kind of improvement, you are welcome to [contribute]
 
 ### License
 
-CortexLink is distributed under [MIT License](https://github.com/Symbolexe/CortexLink/blob/main/LICENSE.md)
+CortexLink is distributed under [MIT License](https://github.com/Symbolexe/CortexLink/blob/main/LICENSE)
