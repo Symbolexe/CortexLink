@@ -1,0 +1,4 @@
+google
+colorama
+requests
+httpx
