@@ -12,7 +12,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # Timeout set to 15 minutes
+    timeout-minutes: 15  # Set a timeout of 15 minutes
 
     strategy:
       matrix:
@@ -31,19 +31,20 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install googlesearch-python colorama tabulate
+        echo "Dependencies installed successfully."
 
     - name: Install flake8
       run: |
         pip install flake8
+        echo "flake8 installed successfully."
 
     - name: Lint with flake8
       run: |
-        # Ensure that flake8 runs using the .flake8 config file
-        # Add some logging to help identify issues
-        echo "Running flake8 linting..."
+        # Add some logging to help identify if there are any issues
+        echo "Starting flake8 linting..."
         flake8 --config .flake8 CortexLink.py || true  # Ensure flake8 errors don't stop the build
         echo "flake8 linting completed."
-    
+
     - name: Run tests
       run: |
         echo "No tests available"
