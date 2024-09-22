@@ -18,7 +18,7 @@ jobs:
     # Define the Python versions you want to test on
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]  # These are valid versions
+        python-version: [3.8, 3.9, 3.10]
 
     steps:
     - name: Checkout code
@@ -27,12 +27,11 @@ jobs:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2  # Set up Python based on the version defined in the matrix
       with:
-        python-version: ${{ matrix.python-version }}  # Use valid Python versions like 3.8, 3.9, or 3.10
+        python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Install the necessary libraries for CortexLink
         pip install googlesearch-python colorama tabulate
 
     - name: Install flake8
