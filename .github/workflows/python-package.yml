@@ -11,20 +11,19 @@ on:
 jobs:
   build:
 
-    # Use the latest Ubuntu image to run the job
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # Timeout set to 15 minutes
 
-    # Define supported Python versions (Python 3.1 is not supported)
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]  # These are valid Python versions
+        python-version: [3.8, 3.9, 3.10]  # Test on multiple Python versions
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Checkout the repository code
+      uses: actions/checkout@v2  # Checkout the repository
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2  # Set up Python using valid versions
+      uses: actions/setup-python@v2  # Set up Python based on the version defined in the matrix
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -39,9 +38,12 @@ jobs:
 
     - name: Lint with flake8
       run: |
-        # Explicitly point to the .flake8 configuration file
+        # Ensure that flake8 runs using the .flake8 config file
+        # Add some logging to help identify issues
+        echo "Running flake8 linting..."
         flake8 --config .flake8 CortexLink.py || true  # Ensure flake8 errors don't stop the build
-
+        echo "flake8 linting completed."
+    
     - name: Run tests
       run: |
         echo "No tests available"
