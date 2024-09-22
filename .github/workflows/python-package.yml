@@ -35,12 +35,13 @@ jobs:
     - name: Lint with flake8
       run: |
         pip install flake8
-        flake8 brat.py  # Lint the main script file
-        # Uncomment the line below to enforce strict linting (build will fail on lint errors)
+        # Replace 'brat.py' with the correct Python file name you want to lint
+        flake8 cortexlink.py  # <-- Update this to match your main script file
+        # Uncomment below for stricter linting (build fails on lint errors)
         # flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
 
     - name: Run tests
       run: |
         echo "No tests available"
-        # Replace this with your actual test command if tests are available
-        # For example: python -m unittest discover
+        # Replace with actual test command if tests exist
+        # python -m unittest discover
