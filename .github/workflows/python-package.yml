@@ -1,5 +1,6 @@
 name: Python Package CI
 
+# Trigger the workflow on push or pull request to the main branch
 on:
   push:
     branches:
@@ -16,11 +17,12 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]  # Test on multiple Python versions
+        # Use only valid Python versions. Python 3.1 is not supported.
+        python-version: [3.8, 3.9, 3.10]
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Checkout the repository
+      uses: actions/checkout@v2  # Checkout the repository code
 
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2  # Set up Python based on the version defined in the matrix
@@ -40,8 +42,8 @@ jobs:
 
     - name: Lint with flake8
       run: |
-        # Add some logging to help identify if there are any issues
         echo "Starting flake8 linting..."
+        # Add the .flake8 config explicitly if necessary
         flake8 --config .flake8 CortexLink.py || true  # Ensure flake8 errors don't stop the build
         echo "flake8 linting completed."
 
