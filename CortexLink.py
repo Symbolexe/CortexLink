@@ -1,11 +1,10 @@
 import argparse
 from googlesearch import search
-import random
 from time import sleep
 from tabulate import tabulate
-from colorama import Fore, Style, init
+from colorama import Fore, init
 init(autoreset=True)
-def perform_search(query, num_results=10, region=None, lang="en", output_file="Cortex-Link-Result.txt", 
+def perform_search(query, num_results=10, region=None, lang="en", output_file="Cortex-Link-Result.txt",
                    use_table=False, no_color=False, proxy=None, ssl_verify=True, sleep_interval=0):
     try:
         with open(output_file, 'w') as output:
@@ -22,12 +21,9 @@ def perform_search(query, num_results=10, region=None, lang="en", output_file="C
                     else:
                         print(result)
             if use_table:
-                if not no_color:
-                    print(Fore.YELLOW + "\nResults in Table Format:\n")
                 headers = ["No", "URL"]
                 table_data = [[i + 1, res] for i, res in enumerate(results)]
                 print(tabulate(table_data, headers=headers, tablefmt="grid"))
-
             print(f"\n[+] Results have been saved to {output_file}")
     except Exception as e:
         print(f"[!] An error occurred: {e}")
