@@ -36,7 +36,7 @@ jobs:
       run: |
         pip install flake8
         # Replace 'brat.py' with the correct Python file name you want to lint
-        flake8 cortexlink.py  # <-- Update this to match your main script file
+        flake8 CortexLink.py  # <-- Update this to match your main script file
         # Uncomment below for stricter linting (build fails on lint errors)
         # flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
 
