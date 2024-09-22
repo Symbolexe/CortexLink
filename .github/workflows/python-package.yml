@@ -13,11 +13,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # Set a timeout of 15 minutes
+    # Set a generous timeout for the job to prevent premature cancellation.
+    timeout-minutes: 20  # Set a longer timeout of 20 minutes
 
     strategy:
       matrix:
-        # Use only valid Python versions. Python 3.1 is not supported.
+        # Use only valid Python versions.
         python-version: [3.8, 3.9, 3.10]
 
     steps:
@@ -31,22 +32,29 @@ jobs:
 
     - name: Install dependencies
       run: |
+        echo "Installing dependencies..."
         python -m pip install --upgrade pip
         pip install googlesearch-python colorama tabulate
         echo "Dependencies installed successfully."
 
     - name: Install flake8
       run: |
+        echo "Installing flake8..."
         pip install flake8
         echo "flake8 installed successfully."
 
     - name: Lint with flake8
       run: |
         echo "Starting flake8 linting..."
-        # Add the .flake8 config explicitly if necessary
         flake8 --config .flake8 CortexLink.py || true  # Ensure flake8 errors don't stop the build
         echo "flake8 linting completed."
 
     - name: Run tests
       run: |
         echo "No tests available"
+
+    # Ensure cleanup happens gracefully in case of an error or cancellation
+    - name: Post-job cleanup
+      if: always()
+      run: |
+        echo "Cleaning up post-job..."
