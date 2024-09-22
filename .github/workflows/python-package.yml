@@ -1,5 +1,4 @@
 name: Python Package CI
-
 on:
   push:
     branches:
@@ -10,7 +9,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,18 +28,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install googlesearch-python colorama tabulate
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: Lint with flake8
       run: |
         pip install flake8
-        # Replace 'brat.py' with the correct Python file name you want to lint
-        flake8 CortexLink.py  # <-- Update this to match your main script file
-        # Uncomment below for stricter linting (build fails on lint errors)
-        # flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 CortexLink.py
 
     - name: Run tests
       run: |
         echo "No tests available"
-        # Replace with actual test command if tests exist
-        # python -m unittest discover
