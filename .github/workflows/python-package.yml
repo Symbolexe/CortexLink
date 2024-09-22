@@ -1,5 +1,6 @@
 name: Python Package CI
 
+# Trigger the workflow on push or pull request to the main branch
 on:
   push:
     branches:
@@ -11,24 +12,27 @@ on:
 jobs:
   build:
 
+    # Use the latest Ubuntu image to run the job
     runs-on: ubuntu-latest
 
+    # Define the Python versions you want to test on
     strategy:
       matrix:
-        python-version: [3.8, 3.9, 3.10]  # Test on Python 3.8, 3.9, and 3.10
+        python-version: [3.8, 3.9, 3.10]  # These are valid versions
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Checkout the repository
+      uses: actions/checkout@v2  # Checkout the repository code
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2  # Set up Python for each version
+      uses: actions/setup-python@v2  # Set up Python based on the version defined in the matrix
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python-version }}  # Use valid Python versions like 3.8, 3.9, or 3.10
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # Install the necessary libraries for CortexLink
         pip install googlesearch-python colorama tabulate
 
     - name: Install flake8
