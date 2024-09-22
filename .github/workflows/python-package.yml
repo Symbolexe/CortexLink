@@ -1,0 +1,46 @@
+name: Python Package CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install googlesearch-python colorama tabulate
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        flake8 brat.py  # Lint the main script file
+        # Uncomment the line below to enforce strict linting (build will fail on lint errors)
+        # flake8 --count --select=E9,F63,F7,F82 --show-source --statistics
+
+    - name: Run tests
+      run: |
+        echo "No tests available"
+        # Replace this with your actual test command if tests are available
+        # For example: python -m unittest discover
