@@ -1,6 +1,5 @@
 name: Python Package CI
 
-# Trigger the workflow on push or pull request to the main branch
 on:
   push:
     branches:
@@ -12,43 +11,35 @@ on:
 jobs:
   build:
 
-    # Set the runner to use the latest Ubuntu environment
     runs-on: ubuntu-latest
-    timeout-minutes: 15  # Timeout after 15 minutes
 
     strategy:
       matrix:
-        # Test the project on multiple Python versions
-        python-version: [3.8, 3.9, 3.10]
+        python-version: [3.8, 3.9, 3.10]  # Test on Python 3.8, 3.9, and 3.10
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Step to check out the repository code
+      uses: actions/checkout@v2  # Checkout the repository
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2  # Step to set up Python based on the matrix version
+      uses: actions/setup-python@v2  # Set up Python for each version
       with:
         python-version: ${{ matrix.python-version }}
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        # Install the necessary libraries for CortexLink
         pip install googlesearch-python colorama tabulate
+
+    - name: Install flake8
+      run: |
+        pip install flake8
 
     - name: Lint with flake8
       run: |
-        pip install flake8
-        # Lint the CortexLink.py script for syntax and style issues
-        flake8 CortexLink.py || true  # Run flake8 but don't fail the build on errors for now
-
-    - name: Debug Linting and Testing  # Adding debug step to ensure this step is working correctly
-      run: |
-        echo "Linting completed. Now running tests or further steps..."
-        echo "This is a debug step to ensure things don't hang."
+        # Run flake8 using the .flake8 config file that ignores non-critical errors
+        flake8 CortexLink.py || true  # Ensure flake8 errors don't stop the build
 
     - name: Run tests
       run: |
         echo "No tests available"
-        # If you add tests, replace the line above with the actual test command:
-        # python -m unittest discover
