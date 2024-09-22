@@ -11,19 +11,20 @@ on:
 jobs:
   build:
 
+    # Use the latest Ubuntu image to run the job
     runs-on: ubuntu-latest
 
+    # Define supported Python versions (Python 3.1 is not supported)
     strategy:
       matrix:
-        # Use supported Python versions (3.6 and above)
-        python-version: [3.8, 3.9, 3.10]
+        python-version: [3.8, 3.9, 3.10]  # These are valid Python versions
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # Checkout the repository
+      uses: actions/checkout@v2  # Checkout the repository code
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2  # Set up Python using supported versions
+      uses: actions/setup-python@v2  # Set up Python using valid versions
       with:
         python-version: ${{ matrix.python-version }}
 
