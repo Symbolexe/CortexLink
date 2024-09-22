@@ -2,7 +2,7 @@
   <br>
   <a href="https://imgbb.com/"><img src="https://i.ibb.co/Stcxy90/Cortex-Link.png" width="250px" alt="Nuclei"></a>
 </h1>
-<h4 align="center">CortexLink** is a powerful command-line search tool built using Python, designed to search Google for specific topics, including CVE links, exploits, Proof of Concept (PoC) links, and educational materials. It supports language, region, and proxy configurations for customized and localized search results.</h4>
+<h4 align="center">CortexLink is a powerful command-line search tool built using Python, designed to search Google for specific topics, including CVE links, exploits, Proof of Concept (PoC) links, and educational materials. It supports language, region, and proxy configurations for customized and localized search results.</h4>
 
 ![CleanShot 2024-09-22 at 12 37 13@2x](https://github.com/user-attachments/assets/f29baaee-c1c6-4d63-aee0-6f79d8451f62)
 ## Table of Contents
